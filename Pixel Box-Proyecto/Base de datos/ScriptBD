@@ -1,0 +1,28 @@
+CREATE TABLE USUARIO (
+    id_usuario VARCHAR(36) PRIMARY KEY,
+    nom_usuario VARCHAR(100) NOT NULL,
+    correo VARCHAR(100) NOT NULL UNIQUE,
+    contrasena VARCHAR(100) NOT NULL  -- cambiar 'contraseña' a 'contrasena'
+);
+
+CREATE TABLE JUEGOS (
+    id_juego VARCHAR(36) PRIMARY KEY,
+    fecha_mod DATETIME NOT NULL,
+    eliminado BOOLEAN NOT NULL DEFAULT 0,
+    nombre VARCHAR(30) NOT NULL,
+    plataforma VARCHAR(30) NOT NULL,
+    genero VARCHAR(30) NOT NULL,
+    calificacion DECIMAL(3,1) NOT NULL,
+    estado VARCHAR(30) NOT NULL,
+    opinion VARCHAR(150),
+    imagen TEXT
+);
+
+CREATE TABLE COMENTS (
+    id_comentario VARCHAR(36) PRIMARY KEY,
+    comentario TEXT,
+    id_usuario VARCHAR(36) NOT NULL,
+    id_juego VARCHAR(36) NOT NULL,
+    FOREIGN KEY (id_usuario) REFERENCES USUARIO(id_usuario) ON DELETE CASCADE,
+    FOREIGN KEY (id_juego) REFERENCES JUEGOS(id_juego) ON DELETE CASCADE
+);
